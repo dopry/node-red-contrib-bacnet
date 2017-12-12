@@ -515,3 +515,204 @@
         }
     });
 </script>
+
+
+<script type="text/x-red" data-template-name="bacnet-subscribe-property">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-address"><i class="icon-bookmark"></i> Address</label>
+        <input type="text" id="node-input-address" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-objectType"><i class="icon-bookmark"></i> Object Type</label>
+        <input type="text" id="node-input-objectType" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-objectInstance"><i class="icon-bookmark"></i> Object Instance</label>
+        <input type="text" id="node-input-objectInstance" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-propertyId"><i class="icon-bookmark"></i> Property ID</label>
+        <input type="text" id="node-input-propertyId" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-arrayIndex"><i class="icon-bookmark"></i> Array Index</label>
+        <input type="text" id="node-input-arrayIndex" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-arrayIndex"><i class="icon-bookmark"></i> Subscribe ID</label>
+        <input type="text" id="node-input-subscribeId" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-arrayIndex"><i class="icon-bookmark"></i> Issue confirmed notifications</label>
+        <input type="checkbox" id="node-input-issueConfirmedNotifications" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-server"><i class="icon-globe"></i> Server</label>
+        <input type="text" id="node-input-server">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="bacnet-subscribe-property">
+    <p>The <code>subscribeProperty</code> command subscribes to a specified objects single properties changes. It accepts an input whose device property will override the properties set here.</p>
+    <ul>
+        <li><code>address</code> <em>[string]</em> - IP address of the target device.</li>
+        <li><code>objectType</code> <em>[number]</em> - The BACNET object type to read.</li>
+        <li><code>objectInstance</code> <em>[number]</em> - The BACNET object instance to read.</li>
+        <li><code>propertyId</code> <em>[number]</em> - The BACNET property id in the specified object to read.</li>
+        <li><code>arrayIndex</code> <em>[number]</em> - The array index of the property to be read.</li>
+        <li><code>subscribeId</code> <em>[number]</em> - Subscription identifier.</li>
+        <li><code>issueConfirmedNotifications</code> <em>[boolean]</em> - Controls whether the the subscription uses confirmations.</li>
+    </ul>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('bacnet-subscribe-property', {
+        category: 'bacnet',
+        color: '#E9967A',
+        defaults: {
+            address: {
+                value: '',
+                required: false
+            },
+            objectType: {
+                value: '',
+                required: false,
+                validate: RED.validators.number()
+            },
+            objectInstance: {
+                value: '',
+                required: false,
+                validate: RED.validators.number()
+            },
+            propertyId: {
+                value: '',
+                required: false,
+                validate: RED.validators.number()
+            },
+            arrayIndex: {
+                value: undefined
+            },
+            subscribeId: {
+                value: '',
+                required: false,
+                validate: RED.validators.number()
+            },
+            issueConfirmedNotifications: {
+                value: false,
+                required: false
+            },
+            server: {
+                value: '',
+                type: 'bacnet-server'
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'automation.gif',
+        paletteLabel: 'BACnet subscribe property',
+        label: function() {
+            return (this.name || 'BACnet subscribe property');
+        }
+    });
+</script>
+
+
+<script type="text/x-red" data-template-name="bacnet-subscribe-cov">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-address"><i class="icon-bookmark"></i> Address</label>
+        <input type="text" id="node-input-address" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-objectType"><i class="icon-bookmark"></i> Object Type</label>
+        <input type="text" id="node-input-objectType" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-objectInstance"><i class="icon-bookmark"></i> Object Instance</label>
+        <input type="text" id="node-input-objectInstance" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-arrayIndex"><i class="icon-bookmark"></i> Subscribe ID</label>
+        <input type="text" id="node-input-subscribeId" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-arrayIndex"><i class="icon-bookmark"></i> Issue confirmed notifications</label>
+        <input type="checkbox" id="node-input-issueConfirmedNotifications" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-arrayIndex"><i class="icon-bookmark"></i> Lifetime</label>
+        <input type="text" id="node-input-lifetime" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-server"><i class="icon-globe"></i> Server</label>
+        <input type="text" id="node-input-server">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="bacnet-subscribe-cov">
+    <p>The <code>subscribeCOV</code> command subscribes to a specified objects changes. It accepts an input whose device property will override the properties set here.</p>
+    <ul>
+        <li><code>address</code> <em>[string]</em> - IP address of the target device.</li>
+        <li><code>objectType</code> <em>[number]</em> - The BACNET object type to read.</li>
+        <li><code>objectInstance</code> <em>[number]</em> - The BACNET object instance to read.</li>
+        <li><code>subscribeId</code> <em>[number]</em> - Subscription identifier.</li>
+        <li><code>issueConfirmedNotifications</code> <em>[boolean]</em> - Controls whether the the subscription uses confirmations.</li>
+        <li><code>lifetime</code> <em>[number]</em> - Subscription lifetime.</li>
+    </ul>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('bacnet-subscribe-cov', {
+        category: 'bacnet',
+        color: '#E9967A',
+        defaults: {
+            address: {
+                value: '',
+                required: false
+            },
+            objectType: {
+                value: '',
+                required: false,
+                validate: RED.validators.number()
+            },
+            objectInstance: {
+                value: '',
+                required: false,
+                validate: RED.validators.number()
+            },
+            subscribeId: {
+                value: '',
+                required: false,
+                validate: RED.validators.number()
+            },
+            issueConfirmedNotifications: {
+                value: false,
+                required: false,
+            },
+            lifetime: {
+                value: 0,
+                required: false,
+                validate: RED.validators.number()
+            },
+            server: {
+                value: '',
+                type: 'bacnet-server'
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'automation.gif',
+        paletteLabel: 'BACnet subscribe COV',
+        label: function() {
+            return (this.name || 'BACnet subscribe COV');
+        }
+    });
+</script>
+

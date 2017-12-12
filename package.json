@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/goliatone/node-red-contrib-bacnet#readme",
   "dependencies": {
-    "bacstack": "0.0.1-beta.11"
+    "bacstack": "github:klemensas/node-bacstack#COV_changes"
   },
   "node-red": {
     "nodes": {

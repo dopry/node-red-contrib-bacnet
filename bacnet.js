@@ -82,7 +82,6 @@ module.exports = function (RED) {
                 value: (input.payload.value || this.defaults.value) + Math.random() * 10000
             }];
             const { address, objectType, objectInstance, propertyId, priority } = Object.assign({}, this.defaults, input.device, input.payload);
-            console.log('write', valueList)
             this.server.connection.writeProperty(
                 address,
                 objectType,
@@ -97,7 +96,7 @@ module.exports = function (RED) {
     }
     RED.nodes.registerType('bacnet-write', BacnetWriteProperty);
     
-        /**
+    /**
      * Bacnet Read Property Multiple
      *
      * The readPropertyMultiple command reads multiple properties from multiple device objects
@@ -129,7 +128,7 @@ module.exports = function (RED) {
     }
     RED.nodes.registerType('bacnet-read-multiple', BacnetReadPropertyMultiple);
     
-        /**
+    /**
      * Bacnet Write Property Multiple
      *
      * The writePropertyMultiple command writes multiple properties to multiple device objects
@@ -158,4 +157,117 @@ module.exports = function (RED) {
         };
     }
     RED.nodes.registerType('bacnet-write-multiple', BacnetWritePropertyMultiple);
+    
+    /**
+     * Bacnet Subsribe Property
+     *
+     * The subscribeProperty subscribes to specified property changes
+     */
+    class BacnetSubscribeProperty {
+        constructor(config) {
+            RED.nodes.createNode(this, config);
+            this.subscription = null;
+            this.server = RED.nodes.getNode(config.server);
+            this.defaults = config;
+            this.on('input', this.onInput);
+            this.on('close', this.unsubscribe);
+        }
+
+        onInput(input) {
+            const { address, objectType, objectInstance, propertyId, arrayIndex, subscribeId, issueConfirmedNotifications } = Object.assign({}, this.defaults, input.device);
+
+            const device = { type: objectType, instance: objectInstance };
+            const property = { propertyIdentifier: propertyId, propertyArrayIndex: arrayIndex };
+
+            // Unsubscribe before subscribing again
+            this.unsubscribe()
+                .then(() => this.server.connection.subscribeProperty(
+                    address,
+                    device,
+                    property,
+                    subscribeId,
+                    issueConfirmedNotifications,
+                    (payload) => {
+                        const message = Object.assign({}, input, { payload: payload })
+                        this.send(message);
+                    })
+                )
+                .then(() => this.subscription = {
+                    address: address,
+                    device: device,
+                    property: property,
+                    subscribeId: subscribeId
+                })
+                .catch((error) => this.error({ error: error }));
+        };
+
+        unsubscribe() {
+            if (!this.subscription || !this.server.connection.client) { return Promise.resolve(); }
+
+            return this.server.connection.unsubscribeProperty(
+                this.subscription.address,
+                this.subscription.subscribeId,
+                this.subscription.device,
+                this.subscription.property
+            )
+                .then(() => this.subscription = null)
+                .catch((error) => this.error({ error: error }));
+        }
+    }
+    RED.nodes.registerType('bacnet-subscribe-property', BacnetSubscribeProperty);
+    
+    /**
+     * Bacnet Subsribe COV
+     *
+     * The subscribeCOV subscribes to all specified object changes
+     */
+    class BacnetSubscribeCOV {
+        constructor(config) {
+            RED.nodes.createNode(this, config);
+            this.subscription = null;
+            this.server = RED.nodes.getNode(config.server);
+            this.defaults = config;
+            this.on('input', this.onInput);
+            this.on('close', this.unsubscribe);
+        }
+
+        onInput(input) {
+            const { address, objectType, objectInstance, subscribeId, issueConfirmedNotifications, lifetime } = Object.assign({}, this.defaults, input.device);
+
+            const device = { type: objectType, instance: objectInstance };
+
+            // Unsubscribe before subscribing again
+            this.unsubscribe()
+                .then(() => this.server.connection.subscribeCOV(
+                    address,
+                    device,
+                    subscribeId,
+                    issueConfirmedNotifications,
+                    lifetime,
+                    (payload) => {
+                        const message = Object.assign({}, input, { payload: payload })
+                        this.send(message);
+                    })
+                )
+                .then(() => this.subscription = {
+                    address: address,
+                    device: device,
+                    subscribeId: subscribeId
+                })
+                .catch((error) => this.error({ error: error }));
+        };
+
+        unsubscribe() {
+            if (!this.subscription || !this.server.connection.client) { return Promise.resolve(); }
+
+            return this.server.connection.unsubscribeCOV(
+                this.subscription.address,
+                this.subscription.subscribeId,
+                this.subscription.device
+            )
+                .then(() => this.subscription = null)
+                .catch((error) => this.error({ error: error }));
+        }
+    }
+    RED.nodes.registerType('bacnet-subscribe-cov', BacnetSubscribeCOV);
 };
