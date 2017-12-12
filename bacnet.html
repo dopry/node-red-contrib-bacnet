@@ -1,3 +1,537 @@
+<script type="text/javascript">
+    var bacnetEnumProperties = {
+        propertyTypes: {
+            'Acked transitions': 0,
+            'Ack required': 1,
+            'Action': 2,
+            'Action text': 3,
+            'Active text': 4,
+            'Active vt sessions': 5,
+            'Alarm value': 6,
+            'Alarm values': 7,
+            'All': 8,
+            'All writes successful': 9,
+            'Apdu segment timeout': 10,
+            'Apdu timeout': 11,
+            'Application software version': 12,
+            'Archive': 13,
+            'Bias': 14,
+            'Change of state count': 15,
+            'Change of state time': 16,
+            'Notification class': 17,
+            'Controlled variable reference': 19,
+            'Controlled variable units': 20,
+            'Controlled variable value': 21,
+            'Cov increment': 22,
+            'Date list': 23,
+            'Daylight savings status': 24,
+            'Deadband': 25,
+            'Derivative constant': 26,
+            'Derivative constant units': 27,
+            'Description': 28,
+            'Description of halt': 29,
+            'Device address binding': 30,
+            'Device type': 31,
+            'Effective period': 32,
+            'Elapsed active time': 33,
+            'Error limit': 34,
+            'Event enable': 35,
+            'Event state': 36,
+            'Event type': 37,
+            'Exception schedule': 38,
+            'Fault values': 39,
+            'Feedback value': 40,
+            'File access method': 41,
+            'File size': 42,
+            'File type': 43,
+            'Firmware revision': 44,
+            'High limit': 45,
+            'Inactive text': 46,
+            'In process': 47,
+            'Instance of': 48,
+            'Integral constant': 49,
+            'Integral constant units': 50,
+            'Issue confirmed notifications': 51,
+            'Limit enable': 52,
+            'List of group members': 53,
+            'List of object property references': 54,
+            'List of session keys': 55,
+            'Local date': 56,
+            'Local time': 57,
+            'Location': 58,
+            'Low limit': 59,
+            'Manipulated variable reference': 60,
+            'Maximum output': 61,
+            'Max apdu length accepted': 62,
+            'Max info frames': 63,
+            'Max master': 64,
+            'Max pres value': 65,
+            'Minimum off time': 66,
+            'Minimum on time': 67,
+            'Minimum output': 68,
+            'Min pres value': 69,
+            'Model name': 70,
+            'Modification date': 71,
+            'Notify type': 72,
+            'Number of apdu retries': 73,
+            'Number of states': 74,
+            'Object identifier': 75,
+            'Object list': 76,
+            'Object name': 77,
+            'Object property reference': 78,
+            'Object type': 79,
+            'Optional': 80,
+            'Out of service': 81,
+            'Output units': 82,
+            'Event parameters': 83,
+            'Polarity': 84,
+            'Present value': 85,
+            'Priority': 86,
+            'Priority array': 87,
+            'Priority for writing': 88,
+            'Process identifier': 89,
+            'Program change': 90,
+            'Program location': 91,
+            'Program state': 92,
+            'Proportional constant': 93,
+            'Proportional constant units': 94,
+            'Protocol conformance class': 95,
+            'Protocol object types supported': 96,
+            'Protocol services supported': 97,
+            'Protocol version': 98,
+            'Read only': 99,
+            'Reason for halt': 100,
+            'Recipient': 101,
+            'Recipient list': 102,
+            'Reliability': 103,
+            'Relinquish default': 104,
+            'Required': 105,
+            'Resolution': 106,
+            'Segmentation supported': 107,
+            'Setpoint': 108,
+            'Setpoint reference': 109,
+            'State text': 110,
+            'Status flags': 111,
+            'System status': 112,
+            'Time delay': 113,
+            'Time of active time reset': 114,
+            'Time of state count reset': 115,
+            'Time synchronization recipients': 116,
+            'Units': 117,
+            'Update interval': 118,
+            'Utc offset': 119,
+            'Vendor identifier': 120,
+            'Vendor name': 121,
+            'Vt classes supported': 122,
+            'Weekly schedule': 123,
+            'Attempted samples': 124,
+            'Average value': 125,
+            'Buffer size': 126,
+            'Client cov increment': 127,
+            'Cov resubscription interval': 128,
+            'Current notify time': 129,
+            'Event time stamps': 130,
+            'Log buffer': 131,
+            'Log device object property': 132,
+            'Enable': 133,
+            'Log interval': 134,
+            'Maximum value': 135,
+            'Minimum value': 136,
+            'Notification threshold': 137,
+            'Previous notify time': 138,
+            'Protocol revision': 139,
+            'Records since notification': 140,
+            'Record count': 141,
+            'Start time': 142,
+            'Stop time': 143,
+            'Stop when full': 144,
+            'Total record count': 145,
+            'Valid samples': 146,
+            'Window interval': 147,
+            'Window samples': 148,
+            'Maximum value timestamp': 149,
+            'Minimum value timestamp': 150,
+            'Variance value': 151,
+            'Active cov subscriptions': 152,
+            'Backup failure timeout': 153,
+            'Configuration files': 154,
+            'Database revision': 155,
+            'Direct reading': 156,
+            'Last restore time,': 157,
+            'Maintenance required': 158,
+            'Member of': 159,
+            'Mode': 160,
+            'Operation expected': 161,
+            'Setting': 162,
+            'Silenced': 163,
+            'Tracking value': 164,
+            'Zone members': 165,
+            'Life safety alarm values': 166,
+            'Max segments accepted': 167,
+            'Profile name': 168,
+            'Auto slave discovery': 169,
+            'Manual slave address binding': 170,
+            'Slave address binding': 171,
+            'Slave proxy enable': 172,
+            'Last notify record': 173,
+            'Schedule default': 174,
+            'Accepted modes': 175,
+            'Adjust value': 176,
+            'Count': 177,
+            'Count before change': 178,
+            'Count change time': 179,
+            'Cov period': 180,
+            'Input reference': 181,
+            'Limit monitoring interval': 182,
+            'Logging object': 183,
+            'Logging record': 184,
+            'Prescale': 185,
+            'Pulse rate': 186,
+            'Scale': 187,
+            'Scale factor': 188,
+            'Update time': 189,
+            'Value before change': 190,
+            'Value set': 191,
+            'Value change time': 192,
+            'Align intervals': 193,
+            'Interval offset': 195,
+            'Last restart reason': 196,
+            'Logging type': 197,
+            'Restart notification recipients': 202,
+            'Time of device restart': 203,
+            'Time synchronization interval': 204,
+            'Trigger': 205,
+            'Utc time synchronization recipients': 206,
+            'Node subtype': 207,
+            'Node type': 208,
+            'Structured object list': 209,
+            'Subordinate annotations': 210,
+            'Subordinate list': 211,
+            'Actual shed level': 212,
+            'Duty window': 213,
+            'Expected shed level': 214,
+            'Full duty baseline': 215,
+            'Requested shed level': 218,
+            'Shed duration': 219,
+            'Shed level descriptions': 220,
+            'Shed levels': 221,
+            'State description': 222,
+            'Door alarm state': 226,
+            'Door extended pulse time': 227,
+            'Door members': 228,
+            'Door open too long time': 229,
+            'Door pulse time': 230,
+            'Door status': 231,
+            'Door unlock delay time': 232,
+            'Lock status': 233,
+            'Masked alarm values': 234,
+            'Secured status': 235,
+            'Absentee limit': 244,
+            'Access alarm events': 245,
+            'Access doors': 246,
+            'Access event': 247,
+            'Access event authentication factor': 248,
+            'Access event credential': 249,
+            'Access event time': 250,
+            'Access transaction events': 251,
+            'Accompaniment': 252,
+            'Accompaniment time': 253,
+            'Activation time': 254,
+            'Active authentication policy': 255,
+            'Assigned access rights': 256,
+            'Authentication factors': 257,
+            'Authentication policy list': 258,
+            'Authentication policy names': 259,
+            'Authentication status': 260,
+            'Authorization mode': 261,
+            'Belongs to': 262,
+            'Credential disable': 263,
+            'Credential status': 264,
+            'Credentials': 265,
+            'Credentials in zone': 266,
+            'Days remaining': 267,
+            'Entry points': 268,
+            'Exit points': 269,
+            'Expiration time': 270,
+            'Extended time enable': 271,
+            'Failed attempt events': 272,
+            'Failed attempts': 273,
+            'Failed attempts time': 274,
+            'Last access event': 275,
+            'Last access point': 276,
+            'Last credential added': 277,
+            'Last credential added time': 278,
+            'Last credential removed': 279,
+            'Last credential removed time': 280,
+            'Last use time': 281,
+            'Lockout': 282,
+            'Lockout relinquish time': 283,
+            'Master exemption': 284,
+            'Max failed attempts': 285,
+            'Members': 286,
+            'Muster point': 287,
+            'Negative access rules': 288,
+            'Number of authentication policies': 289,
+            'Occupancy count': 290,
+            'Occupancy count adjust': 291,
+            'Occupancy count enable': 292,
+            'Occupancy exemption': 293,
+            'Occupancy lower limit': 294,
+            'Occupancy lower limit enforced': 295,
+            'Occupancy state': 296,
+            'Occupancy upper limit': 297,
+            'Occupancy upper limit enforced': 298,
+            'Passback exemption': 299,
+            'Passback mode': 300,
+            'Passback timeout': 301,
+            'Positive access rules': 302,
+            'Reason for disable': 303,
+            'Supported formats': 304,
+            'Supported format classes': 305,
+            'Threat authority': 306,
+            'Threat level': 307,
+            'Trace flag': 308,
+            'Transaction notification class': 309,
+            'User external identifier': 310,
+            'User information reference': 311,
+            'User name': 317,
+            'User type': 318,
+            'Uses remaining': 319,
+            'Zone from': 320,
+            'Zone to': 321,
+            'Access event tag': 322,
+            'Global identifier': 323,
+            'Verification time': 326,
+            'Base device security policy': 327,
+            'Distribution key revision': 328,
+            'Do not hide': 329,
+            'Key sets': 330,
+            'Last key server': 331,
+            'Network access security policies': 332,
+            'Packet reorder time': 333,
+            'Security pdu timeout': 334,
+            'Security time window': 335,
+            'Supported security algorithms': 336,
+            'Update key set timeout': 337,
+            'Backup and restore state': 338,
+            'Backup preparation time': 339,
+            'Restore completion time': 340,
+            'Restore preparation time': 341,
+            'Bit mask': 342,
+            'Bit text': 343,
+            'Is utc': 344,
+            'Group members': 345,
+            'Group member names': 346,
+            'Member status flags': 347,
+            'Requested update interval': 348,
+            'Covu period': 349,
+            'Covu recipients': 350,
+            'Event message texts': 351,
+            'Event message texts config': 352,
+            'Event detection enable': 353,
+            'Event algorithm inhibit': 354,
+            'Event algorithm inhibit ref': 355,
+            'Time delay normal': 356,
+            'Reliability evaluation inhibit': 357,
+            'Fault parameters': 358,
+            'Fault type': 359,
+            'Local forwarding only': 360,
+            'Process identifier filter': 361,
+            'Subscribed recipients': 362,
+            'Port filter': 363,
+            'Authorization exemptions': 364,
+            'Allow group delay inhibit': 365,
+            'Channel number': 366,
+            'Control groups': 367,
+            'Execution delay': 368,
+            'Last priority': 369,
+            'Write status': 370,
+            'Property list': 371,
+            'Serial number': 372,
+            'Blink warn enable': 373,
+            'Default fade time': 374,
+            'Default ramp rate': 375,
+            'Default step increment': 376,
+            'Egress time': 377,
+            'In progress': 378,
+            'Instantaneous power': 379,
+            'Lighting command': 380,
+            'Lighting command default priority': 381,
+            'Max actual value': 382,
+            'Min actual value': 383,
+            'Power': 384,
+            'Transition': 385,
+            'Egress active': 386,
+            'Interface value': 387,
+            'Fault high limit': 388,
+            'Fault low limit': 389,
+            'Low diff limit': 390,
+            'Strike count': 391,
+            'Time of strike count reset': 392,
+            'Default timeout': 393,
+            'Initial timeout': 394,
+            'Last state change': 395,
+            'State change values': 396,
+            'Timer running': 397,
+            'Timer state': 398,
+            'Apdu length': 399,
+            'Ip address': 400,
+            'Ip default gateway': 401,
+            'Ip dhcp enable': 402,
+            'Ip dhcp lease time': 403,
+            'Ip dhcp lease time remaining': 404,
+            'Ip dhcp server': 405,
+            'Ip dns server': 406,
+            'Bacnet ip global address': 407,
+            'Bacnet ip mode': 408,
+            'Bacnet ip multicast address': 409,
+            'Bacnet ip nat traversal': 410,
+            'Ip subnet mask': 411,
+            'Bacnet ip udp port': 412,
+            'Bbmd accept fd registrations': 413,
+            'Bbmd broadcast distribution table': 414,
+            'Bbmd foreign device table': 415,
+            'Changes pending': 416,
+            'Command': 417,
+            'Fd bbmd address': 418,
+            'Fd subscription lifetime': 419,
+            'Link speed': 420,
+            'Link speeds': 421,
+            'Link speed autonegotiate': 422,
+            'Mac address': 423,
+            'Network interface name': 424,
+            'Network number': 425,
+            'Network number quality': 426,
+            'Network type': 427,
+            'Routing table': 428,
+            'Virtual mac address table': 429,
+            'Command time array': 430,
+            'Current command priority': 431,
+            'Last command time': 432,
+            'Value source': 433,
+            'Value source array': 434,
+            'Bacnet ipv6 mode': 435,
+            'Ipv6 address': 436,
+            'Ipv6 prefix length': 437,
+            'Bacnet ipv6 udp port': 438,
+            'Ipv6 default gateway': 439,
+            'Bacnet ipv6 multicast address': 440,
+            'Ipv6 dns server': 441,
+            'Ipv6 auto addressing enable': 442,
+            'Ipv6 dhcp lease time': 443,
+            'Ipv6 dhcp lease time remaining': 444,
+            'Ipv6 dhcp server': 445,
+            'Ipv6 zone index': 446,
+            'Assigned landing calls': 447,
+            'Car assigned direction': 448,
+            'Car door command': 449,
+            'Car door status': 450,
+            'Car door text': 451,
+            'Car door zone': 452,
+            'Car drive status': 453,
+            'Car load': 454,
+            'Car load units': 455,
+            'Car mode': 456,
+            'Car moving direction': 457,
+            'Car position': 458,
+            'Elevator group': 459,
+            'Energy meter': 460,
+            'Energy meter ref': 461,
+            'Escalator mode': 462,
+            'Fault signals': 463,
+            'Floor text': 464,
+            'Group id': 465,
+            'Group mode': 467,
+            'Higher deck': 468,
+            'Installation id': 469,
+            'Landing calls': 470,
+            'Landing call control': 471,
+            'Landing door status': 472,
+            'Lower deck': 473,
+            'Machine room id': 474,
+            'Making car call': 475,
+            'Next stopping floor': 476,
+            'Operation direction': 477,
+            'Passenger alarm': 478,
+            'Power mode': 479,
+            'Registered car call': 480,
+            'Active cov multiple subscriptions': 481,
+            'Protocol level': 482,
+            'Reference port': 483,
+            'Deployed profile location': 484,
+            'Profile location': 485,
+            'Tags': 486,
+            'Subordinate node types': 487,
+            'Subordinate tags': 488,
+            'Subordinate relationships': 489,
+            'Default subordinate relationship': 490,
+            'Represents': 491,
+        },
+        objectTypes: {
+            'Analog input': 0,
+            'Analog output': 1,
+            'Analog value': 2,
+            'Binary input': 3,
+            'Binary output': 4,
+            'Binary value': 5,
+            'Calendar': 6,
+            'Command': 7,
+            'Device': 8,
+            'Event enrollment': 9,
+            'File': 10,
+            'Group': 11,
+            'Loop': 12,
+            'Multi state input': 13,
+            'Multi state output': 14,
+            'Notification class': 15,
+            'Program': 16,
+            'Schedule': 17,
+            'Averaging': 18,
+            'Multi state value': 19,
+            'Trend log': 20,
+            'Life safety point': 21,
+            'Life safety zone': 22,
+            'Accumulator': 23,
+            'Pulse converter': 24,
+            'Event log': 25,
+            'Global group': 26,
+            'Trend log multiple': 27,
+            'Load control': 28,
+            'Structured view': 29,
+            'Access door': 30,
+            'Timer': 31,
+            'Access credential': 32,
+            'Access point': 33,
+            'Access rights': 34,
+            'Access user': 35,
+            'Access zone': 36,
+            'Credential data input': 37,
+            'Network security': 38,
+            'Bitstring value': 39,
+            'Characterstring value': 40,
+            'Datepattern value': 41,
+            'Date value': 42,
+            'Datetimepattern value': 43,
+            'Datetime value': 44,
+            'Integer value': 45,
+            'Large analog value': 46,
+            'Octetstring value': 47,
+            'Positive integer value': 48,
+            'Timepattern value': 49,
+            'Time value': 50,
+            'Notification forwarder': 51,
+            'Alert enrollment': 52,
+            'Channel': 53,
+            'Lighting output': 54,
+            'Binary lighting output': 55,
+            'Network port': 56,
+            'Elevator group': 57,
+            'Escalator': 58,
+            'Lift': 59,
+        }
+    }
+</script>
+
 <script type="text/x-red" data-template-name="bacnet-server">
     <div class="form-row">
         <label for="node-config-input-interface"><i class="icon-bookmark"></i> Interface</label>
@@ -155,7 +689,7 @@
 
     <div class="form-row">
         <label for="node-input-objectType"><i class="icon-bookmark"></i> Object Type</label>
-        <input type="text" id="node-input-objectType" placeholder="">
+        <select id="node-input-objectType" placeholder=""></select>
     </div>
 
     <div class="form-row">
@@ -165,7 +699,7 @@
 
     <div class="form-row">
         <label for="node-input-propertyId"><i class="icon-bookmark"></i> Property ID</label>
-        <input type="text" id="node-input-propertyId" placeholder="">
+        <select id="node-input-propertyId" placeholder=""></select>
     </div>
 
     <div class="form-row">
@@ -231,6 +765,27 @@
         paletteLabel: 'BACnet read',
         label: function() {
             return (this.name || 'BACnet read');
+        },
+        oneditprepare: function() {
+            var objectType = document.querySelector('select#node-input-objectType');
+            objectType.insertAdjacentHTML(
+                'afterbegin',
+                Object.keys(bacnetEnumProperties.objectTypes).map((key) =>
+                '<option value="' + bacnetEnumProperties.objectTypes[key] + '">' +
+                    key + ' (' + bacnetEnumProperties.objectTypes[key] + ')' + '</option>'
+                ).join('')
+            );
+            objectType.value = this.objectType;
+
+            var propertyId = document.querySelector('select#node-input-propertyId');
+            propertyId.insertAdjacentHTML(
+                'afterbegin',
+                Object.keys(bacnetEnumProperties.propertyTypes).map((key) =>
+                '<option value="' + bacnetEnumProperties.propertyTypes[key] + '">' +
+                    key + ' (' + bacnetEnumProperties.propertyTypes[key] + ')' + '</option>'
+                ).join('')
+            );
+            propertyId.value = this.propertyId;
         }
     });
 </script>
@@ -248,7 +803,7 @@
 
     <div class="form-row">
         <label for="node-input-objectType"><i class="icon-bookmark"></i>Object Type</label>
-        <input type="text" id="node-input-objectType" placeholder="Object Type">
+        <select id="node-input-objectType" placeholder="Object Type"></select>
     </div>
 
     <div class="form-row">
@@ -258,7 +813,7 @@
 
     <div class="form-row">
         <label for="node-input-propertyId"><i class="icon-bookmark"></i> Property ID</label>
-        <input type="text" id="node-input-propertyId" placeholder="Property ID">
+        <select id="node-input-propertyId" placeholder="Property ID"></select>
     </div>
 
     <div class="form-row">
@@ -361,6 +916,27 @@
         paletteLabel: 'BACnet write',
         label: function() {
             return (this.name || 'BACnet write');
+        },
+        oneditprepare: function() {
+            var objectType = document.querySelector('select#node-input-objectType');
+            objectType.insertAdjacentHTML(
+                'afterbegin',
+                Object.keys(bacnetEnumProperties.objectTypes).map((key) =>
+                '<option value="' + bacnetEnumProperties.objectTypes[key] + '">' +
+                    key + ' (' + bacnetEnumProperties.objectTypes[key] + ')' + '</option>'
+                ).join('')
+            );
+            objectType.value = this.objectType;
+
+            var propertyId = document.querySelector('select#node-input-propertyId');
+            propertyId.insertAdjacentHTML(
+                'afterbegin',
+                Object.keys(bacnetEnumProperties.propertyTypes).map((key) =>
+                '<option value="' + bacnetEnumProperties.propertyTypes[key] + '">' +
+                    key + ' (' + bacnetEnumProperties.propertyTypes[key] + ')' + '</option>'
+                ).join('')
+            );
+            propertyId.value = this.propertyId;
         }
     });
 </script>
@@ -528,7 +1104,7 @@
     </div>
     <div class="form-row">
         <label for="node-input-objectType"><i class="icon-bookmark"></i> Object Type</label>
-        <input type="text" id="node-input-objectType" placeholder="">
+        <select id="node-input-objectType" placeholder=""></select>
     </div>
     <div class="form-row">
         <label for="node-input-objectInstance"><i class="icon-bookmark"></i> Object Instance</label>
@@ -536,7 +1112,7 @@
     </div>
     <div class="form-row">
         <label for="node-input-propertyId"><i class="icon-bookmark"></i> Property ID</label>
-        <input type="text" id="node-input-propertyId" placeholder="">
+        <select id="node-input-propertyId" placeholder=""></select>
     </div>
     <div class="form-row">
         <label for="node-input-arrayIndex"><i class="icon-bookmark"></i> Array Index</label>
@@ -616,6 +1192,27 @@
         paletteLabel: 'BACnet subscribe property',
         label: function() {
             return (this.name || 'BACnet subscribe property');
+        },
+        oneditprepare: function() {
+            var objectType = document.querySelector('select#node-input-objectType');
+            objectType.insertAdjacentHTML(
+                'afterbegin',
+                Object.keys(bacnetEnumProperties.objectTypes).map((key) =>
+                '<option value="' + bacnetEnumProperties.objectTypes[key] + '">' +
+                    key + ' (' + bacnetEnumProperties.objectTypes[key] + ')' + '</option>'
+                ).join('')
+            );
+            objectType.value = this.objectType;
+
+            var propertyId = document.querySelector('select#node-input-propertyId');
+            propertyId.insertAdjacentHTML(
+                'afterbegin',
+                Object.keys(bacnetEnumProperties.propertyTypes).map((key) =>
+                '<option value="' + bacnetEnumProperties.propertyTypes[key] + '">' +
+                    key + ' (' + bacnetEnumProperties.propertyTypes[key] + ')' + '</option>'
+                ).join('')
+            );
+            propertyId.value = this.propertyId;
         }
     });
 </script>
@@ -632,7 +1229,7 @@
     </div>
     <div class="form-row">
         <label for="node-input-objectType"><i class="icon-bookmark"></i> Object Type</label>
-        <input type="text" id="node-input-objectType" placeholder="">
+        <select id="node-input-objectType" placeholder=""></select>
     </div>
     <div class="form-row">
         <label for="node-input-objectInstance"><i class="icon-bookmark"></i> Object Instance</label>
@@ -712,6 +1309,17 @@
         paletteLabel: 'BACnet subscribe COV',
         label: function() {
             return (this.name || 'BACnet subscribe COV');
+        },
+        oneditprepare: function() {
+            var objectType = document.querySelector('select#node-input-objectType');
+            objectType.insertAdjacentHTML(
+                'afterbegin',
+                Object.keys(bacnetEnumProperties.objectTypes).map((key) =>
+                '<option value="' + bacnetEnumProperties.objectTypes[key] + '">' +
+                    key + ' (' + bacnetEnumProperties.objectTypes[key] + ')' + '</option>'
+                ).join('')
+            );
+            objectType.value = this.objectType;
         }
     });
 </script>
