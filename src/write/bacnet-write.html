@@ -1,0 +1,154 @@
+<script type="text/x-red" data-template-name="bacnet-write">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-address"><i class="icon-bookmark"></i> Address</label>
+        <input type="text" id="node-input-address" placeholder="Address">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-objectType"><i class="icon-bookmark"></i>Object Type</label>
+        <select id="node-input-objectType" placeholder="Object Type"></select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-objectInstance"><i class="icon-bookmark"></i>Object Instance</label>
+        <input type="text" id="node-input-objectInstance" placeholder="Object Instance">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-propertyId"><i class="icon-bookmark"></i> Property ID</label>
+        <select id="node-input-propertyId" placeholder="Property ID"></select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-priority"><i class="icon-bookmark"></i> Priority</label>
+        <input type="text" id="node-input-priority" placeholder="Priority">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-applicationTag"><i class="fa fa-empire"></i> Value Type</label>
+        <select id="node-input-applicationTag">
+            <option value="" disabled selected>Select your option</option>
+            <option value="0">Null</option>
+            <option value="1">Boolean</option>
+            <option value="2">Unsigned Int</option>
+            <option value="3">Signed Int</option>
+            <option value="4">Real</option>
+            <option value="5">Double</option>
+            <option value="6">Octect String</option>
+            <option value="7">Character String</option>
+            <option value="8">Bit String</option>
+            <option value="9">Enumerated</option>
+            <option value="10">Date</option>
+            <option value="11">Time</option>
+            <option value="12">Object Id</option>
+            <option value="13">Reserve 1</option>
+            <option value="14">Reserve 2</option>
+            <option value="15">Reserve 3</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-config-input-value"><i class="fa fa-empire"></i> Value</label>
+        <input type="text" id="node-input-value" placeholder="Value">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-bacnetInterface"><i class="icon-globe"></i> Server</label>
+        <input type="text" id="node-input-bacnetInterface">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="bacnet-write">
+    <p>The <code>writeProperty</code> command writes a single property of an object to a device. It accepts an input whose payload will override the properties set here.</p>
+    <h3>Inputs (TBD)</h3>
+    <ul>
+        <li><code>address</code> <em>[string]</em> - IP address of the target device.</li>
+        <li><code>objectType</code> <em>[number]</em> - The BACNET object type to write.</li>
+        <li><code>objectInstance</code> <em>[number]</em> - IP address of the target device.</li>
+        <li><code>propertyId</code> <em>[number]</em> - The BACNET property id in the specified object to write.</li>
+        <li><code>priority</code> <em>[number]</em> - The priority to be used for writing to the property.</li>
+        <li><code>valueList</code> <em>[array]</em> - A list of values to be written to the speicifed property. The <code>Tag</code> value has to be a <code>BacnetApplicationTags</code> declaration as specified in <code>lib/bacnet-enum.js</code>.</li>
+    </ul>
+    <h3>Outputs</h3>
+    <p>TBD</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('bacnet-write', {
+        category: 'BACnet',
+        color: '#E9967A',
+        defaults: {
+            name: {
+                value: ''
+            },
+            address: {
+                value: '',
+                required: false
+            },
+            objectType: {
+                value: '',
+                required: false,
+                validate: RED.validators.number()
+            },
+            objectInstance: {
+                value: '',
+                required: false,
+                validate: RED.validators.number()
+            },
+            propertyId: {
+                value: '',
+                required: false,
+                validate: RED.validators.number()
+            },
+            priority: {
+                value: '',
+                validate: RED.validators.number()
+            },
+            applicationTag: {
+                value: ''
+            },
+            value: {
+                value: '',
+                required: false
+            },
+            bacnetInterface: {
+                value: '',
+                type: 'bacnet-interface'
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'bacnet-icon.png',
+        paletteLabel: 'Write',
+        label: function() {
+            return (this.name || 'Write');
+        },
+        oneditprepare: function() {
+            $.getJSON('/bacnet/ObjectTypes', function(options) {
+                let select = document.getElementById('node-input-objectType');
+                options.forEach(element => {
+                    let option = document.createElement("option");
+                    option.value = element.value;
+                    option.label = element.label;
+                    select.add(option);
+                });
+                select.value = this.objectType;
+            });
+
+            $.getJSON('/bacnet/PropertyIds', (options) => {
+                let select = document.getElementById('node-input-propertyId');
+                options.forEach(element => {
+                    let option = document.createElement("option");
+                    option.value = element.value;
+                    option.label = element.label;
+                    select.add(option);
+                });
+                select.value = this.propertyId;
+            });           
+        }
+    });
+</script>

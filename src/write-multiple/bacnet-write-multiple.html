@@ -1,0 +1,83 @@
+<script type="text/x-red" data-template-name="bacnet-write-multiple">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-address"><i class="icon-bookmark"></i> Address</label>
+        <input type="text" id="node-input-address" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-bacnetInterface"><i class="icon-globe"></i> Server</label>
+        <input type="text" id="node-input-bacnetInterface">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="bacnet-write-multiple">
+    <p>The <code>writePropertyMultiple</code> command writes multiple properties to multiple device objects. It accepts address which can be override by input.</p>
+    <p>This node expects input to provide <code>valueList</code> property with the target write fields.</p>
+    <h3><code>valueList</code></h3>
+    <dl class="message-properties">
+        <dt>objectIdentifier <span class="property-type">object</span></dt>
+        <dd>
+            <span>Specific object to read.</span>
+            <dl class="message-properties">
+                <dt>type <span class="property-type">number</span></dt>
+                <dd>Bacnet object type to read</dd>
+                <dt>instance <span class="property-type">number</span></dt>
+                <dd>Bacnet object instance to read.</dd>
+            </dl>
+        </dd>
+        <dt>values <span class="property-type">Array&lt;object&gt;</span></dt>
+        <dd>
+            <span>List of properties to be written.</span>
+            <dl class="message-properties">
+                <dt>property <span class="property-type">object</span></dt>
+                <dd>
+                    <dl class="message-properties">
+                        <dt>propertyIdentifier <span class="property-type">number</span></dt>
+                        <dd>Bacnet property id to write.</dd>
+                        <dt>propertyArrayIndex <span class="property-type">number</span></dt>
+                        <dd>Array index of property to write.</dd>
+                    </dl>
+                </dd>
+                <dt>value <span class="property-type">Array&lt;object&gt;</span></dt>
+                <dd>
+                    <span>List of values to be written to the specified property.</span>
+                    <dl class="message-properties">
+                        <dt>type <span class="property-type">number</span></dt>
+                        <dd>Data type of value to write.</dd>
+                        <dt>value <span class="property-type">any</span></dt>
+                        <dd>Actual value to write.</dd>
+                    </dl>
+                </dd>
+                <dt>priority <span class="property-type">number</span></dt>
+                <dd>Priority used for writing to property.</dd>
+            </dl>
+        </dd>
+    </dl>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('bacnet-write-multiple', {
+        category: 'BACnet',
+        color: '#E9967A',
+        defaults: {
+            address: {
+                value: '',
+                required: false
+            },
+            bacnetInterface: {
+                value: '',
+                type: 'bacnet-interface'
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'bacnet-icon.png',
+        paletteLabel: 'Write Multiple',
+        label: function() {
+            return (this.name || 'Write Multiple');
+        }
+    });
+</script>

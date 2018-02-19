@@ -1,0 +1,129 @@
+<script type="text/x-red" data-template-name="bacnet-read">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-address"><i class="icon-bookmark"></i> Address</label>
+        <input type="text" id="node-input-address" placeholder="">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-objectType"><i class="icon-bookmark"></i> Object Type</label>
+        <select id="node-input-objectType" placeholder=""></select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-objectInstance"><i class="icon-bookmark"></i> Object Instance</label>
+        <input type="text" id="node-input-objectInstance" placeholder="">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-propertyId"><i class="icon-bookmark"></i> Property ID</label>
+        <select id="node-input-propertyId" placeholder=""></select>
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-arrayIndex"><i class="icon-bookmark"></i> Array Index</label>
+        <input type="text" id="node-input-arrayIndex" placeholder="">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-bacnetInterface"><i class="icon-globe"></i> Server</label>
+        <input type="text" id="node-input-bacnetInterface">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="bacnet-read">
+    <p>The <code>readProperty</code> command reads a single property of an object from a device. It accepts an input whose device property will override the properties set here.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>address <span class="property-type">string</span></dt>
+        <dd>IP address of the target device.</dd>
+        <dt>objectType <span class="property-type">number | bacstack.enum.ObjectTypes</span></dt>
+        <dd>The BACNET object type to read.</dd>
+        <dt>objectInstance <span class="property-type">number</span></dt>
+        <dd>The BACNET object instance to read.</dd>
+        <dt>propertyId <span class="property-type">number | bacstack.enum.PropertyIds</span></dt>
+        <dd>The BACNET property id in the specified object to read.</dd>
+        <dt>arrayIndex <span class="property-type">number</span></dt>
+        <dd>The array index of the property to be read.</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <h4>TBD</h4>
+    </dl>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('bacnet-read', {
+        category: 'BACnet',
+        color: '#E9967A',
+        defaults: {
+            name: {
+                value: ''
+            },
+            address: {
+                value: '',
+                required: false
+                // TODO: Validate to IP Address
+            },
+            objectType: {
+                value: '',
+                required: false,
+                // TODO: Validate to ObjectTypes
+                validate: RED.validators.number()
+            },
+            objectInstance: {
+                value: '',
+                required: false,
+                validate: RED.validators.number()
+            },
+            propertyId: {
+                value: '',
+                required: false,
+                // TODO: Validate to PropertyIds.
+                validate: RED.validators.number()
+            },
+            arrayIndex: {
+                value: undefined
+            },
+            bacnetInterface: {
+                value: '',
+                type: 'bacnet-interface'
+            }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'bacnet-icon.png',
+        paletteLabel: 'Read',
+        label: function() {
+            return (this.name || 'Read');
+        },
+        oneditprepare: function() {
+            let self = this;
+            $.getJSON('/bacnet/ObjectTypes', function(options) {
+                let select = document.getElementById('node-input-objectType');
+                options.forEach(element => {
+                    let option = document.createElement("option");
+                    option.value = element.value;
+                    option.label = element.label;
+                    select.add(option);
+                });
+                select.value = self.objectType;
+            });
+
+            $.getJSON('/bacnet/PropertyIds', (options) => {
+                let select = document.getElementById('node-input-propertyId');
+                console.log('options', options);
+                options.forEach(element => {
+                    let option = document.createElement("option");
+                    option.value = element.value;
+                    option.label = element.label;
+                    select.add(option);
+                });
+                select.value = self.propertyId;
+            });           
+        }
+    });
+</script>

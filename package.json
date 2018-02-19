@@ -22,11 +22,24 @@
   },
   "homepage": "https://github.com/goliatone/node-red-contrib-bacnet#readme",
   "dependencies": {
-    "bacstack": "github:klemensas/node-bacstack#COV_changes"
+    "bacstack": "0.0.1-beta.13",
+    "node-red": "^0.18.3"
+  },
+  "peerDependencies": {
+    "node-red": "^0.18.3"
   },
   "node-red": {
     "nodes": {
-      "bacnet": "bacnet.js"
+      "bacnet-admin": "src/admin/bacnet-admin.js",
+      "bacnet-interface": "src/interface/bacnet-interface.js",
+      "bacnet-iam": "src/iam/bacnet-iam.js",
+      "bacnet-read": "src/read/bacnet-read.js",
+      "bacnet-read-multiple": "src/read-multiple/bacnet-read-multiple.js",
+      "bacnet-subscribe": "src/subscribe/bacnet-subscribe.js",
+      "bacnet-subscribe-property": "src/subscribe-property/bacnet-subscribe-property.js",
+      "bacnet-who-is": "src/who-is/bacnet-who-is.js",
+      "bacnet-write": "src/write/bacnet-write.js",
+      "bacnet-write-multiple": "src/write-multiple/bacnet-write-multiple.js"
     }
   }
 }

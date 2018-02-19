@@ -1,0 +1,57 @@
+<script type="text/javascript">
+    RED.nodes.registerType('bacnet-interface', {
+        category: 'config',
+        defaults: {
+            interface: {
+                value: '', required: false
+            },
+            port: {
+                value: 47808,
+                required: false,
+                validate: RED.validators.number()
+            },
+            broadcastAddress: {
+                value: '',
+                required: false
+            },
+            timeout: {
+                value: 6000,
+                required: false,
+                validate: RED.validators.number()
+            }
+        },
+        label: function() {
+            return 'bacnet listening on ' + this.interface + ':' + this.port;
+        }
+    });
+</script>
+
+
+<script type="text/x-red" data-template-name="bacnet-interface">
+    <div class="form-row">
+        <label for="node-config-input-interface"><i class="icon-bookmark"></i> Interface</label>
+        <input type="text" id="node-config-input-interface">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-port"><i class="icon-bookmark"></i> Port</label>
+        <input type="text" id="node-config-input-port">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-broadcastAddress"><i class="icon-bookmark"></i> Broadcast Address</label>
+        <input type="text" id="node-config-input-broadcastAddress">
+    </div>
+    <div class="form-row1">
+        <label for="node-config-input-adpuTimeout"><i class="fa fa-clock-o"></i> Connection Timeout (s)</label>
+        <input type="text" id="node-config-input-adpuTimeout">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="bacnet-interface">
+    <p>To be able to communicate to BACNET devices, you have to initialize a new client instance.</p>
+    <ul>
+        <li><code>interface</code> <em>[string]</em> - Specify the interface to listen to for BACNET communications <em>Optional</em>.</li>
+        <li><code>port</code> <em>[number]</em> - BACNET communication port for listening and sending. Default is <code>47808</code>. <em>Optional</em>.</li>
+        <li><code>broadcastAddress</code> <em>[string]</em> - The address used for broadcast messages. Default is <code>255.255.255.255</code>. <em>Optional</em>.</li>
+        <li><code>adpuTimeout</code> <em>[number]</em> - The timeout in milliseconds until a transaction should be interpreted as error. Default is <code>3000</code>. <em>Optional</em>.</li>
+    </ul>
+</script>

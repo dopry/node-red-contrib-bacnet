@@ -1,0 +1,38 @@
+<script type="text/x-red" data-template-name="bacnet-iam">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+   
+    <div class="form-row">
+        <label for="node-input-bacnetInterface"><i class="icon-globe"></i> Server</label>
+        <input type="text" id="node-input-bacnetInterface">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="bacnet-iam">
+    <p>The <code>iAm</code> node emits events as devices broadcast their BACnet presence.</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('bacnet-iam', {
+        category: 'BACnet',
+        color: '#E9967A',
+        defaults: {
+            name: {
+                value: ''
+            },
+            bacnetInterface: {
+                value: '',
+                type: 'bacnet-interface'
+            }
+        },
+        inputs: 0,
+        outputs: 1,
+        icon: 'bacnet-icon.png',
+        paletteLabel: 'iAm',
+        label: function() {
+            return (this.name || 'iAm');
+        }
+    });
+</script>

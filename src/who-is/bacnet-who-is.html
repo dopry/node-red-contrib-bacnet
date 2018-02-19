@@ -1,0 +1,90 @@
+<script type="text/x-red" data-template-name="bacnet-who-is">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-lowLimit"><i class="icon-tag"></i> Low limit</label>
+        <input type="text" id="node-input-lowLimit" placeholder="Low limit">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-highLimit"><i class="icon-tag"></i> High limit</label>
+        <input type="text" id="node-input-highLimit" placeholder="High limit">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-address"><i class="icon-tag"></i> Address</label>
+        <input type="text" id="node-input-address" placeholder="Address">
+    </div>
+
+    <div class="form-row">
+        <label for="node-input-bacnetInterface"><i class="icon-globe"></i> Server</label>
+        <input type="text" id="node-input-bacnetInterface">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="bacnet-who-is">
+    <p>The <code>whoIs</code> command discovers all BACNET devices in the network.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt><code>lowLimit</code> <span class="property-type">number</span></dt>
+        <dd>Minimal device instance number to search for. <em>Optional</em>.</dd>
+        <dt><code>highLimit</code> <span class="property-type">number</span></dt>
+        <dd>Maximal device instance number to search for. <em>Optional</em>.</dd>
+        <dt><code>address</code> <span class="property-type">string</span></dt>
+        <dd>Unicast address if command should sent to a device directly. <em>Optional</em>.</dd>
+    </dl>
+    <h3>Output <code>message.payload</code></h3>
+    <dl class="message-properties">
+        <dt>address <span class="property-type">string</span></dt>
+        <dd>IP address of the detected device.</dd>
+        <dt>deviceId <span class="property-type">number</span></dt>
+        <dd>Bacnet device id.</dd>
+        <dt>maxAdpu <span class="property-type">number</span></dt>
+        <dd>Max ADPU size the device is supporting.</dd>
+        <dt>segmentation <span class="property-type">number</span></dt>
+        <dd>Type of segmentation the device is supporting.</dd>
+        <dt>vendorId <span class="property-type">number</span></dt>
+        <dd>Bacnet vendor id.</dd>
+    </dl>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('bacnet-who-is', {
+        category: 'BACnet',
+        color: '#E9967A',
+        defaults: {
+            name: {
+                value: ''
+            },
+            address: {
+                value: '',
+                required: false
+            },
+            lowLimit: {
+                value: null,
+                required: false,
+                validate: RED.validators.number()
+            },
+            highLimit: {
+                value: null,
+                required: false,
+                validate: RED.validators.number()
+            },
+            bacnetInterface: {
+                type: 'bacnet-interface',
+                required: true,
+                value: ''
+            }
+        },
+        inputs: 1,
+        outputs: 0,
+        icon: 'bacnet-icon.png',
+        paletteLabel: 'Who-Is',
+        label: function() {
+            return (this.name || 'Who-Is');
+        }
+    });
+</script>
